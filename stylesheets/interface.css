@@ -464,6 +464,14 @@ ul#links li a:selected {    }
 	min-height: 300px;
 }
 
+#updateInfo
+{
+	display: none;
+	background-color: #f1f0ee;
+	width: 855px;
+	min-height: 300px;
+}
+
 #dirtHut { display: none}
 #stickHut { display: none }
 #sodHouse {display: none}
