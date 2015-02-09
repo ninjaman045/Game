@@ -2495,12 +2495,15 @@ function buildingsTab()
 	document.getElementById("transcendence").style.display = "none";
 	document.getElementById("gambling").style.display = "none";
 	document.getElementById("settings").style.display= "none";
+	document.getElementById("updateInfo").style.display= "none";
+	
 	document.getElementById("buildingsTab").style.backgroundColor = "#f1f0ee";
 	document.getElementById("upgradesTab").style.backgroundColor = "#dedbde";
 	document.getElementById("achievementsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("transcendTab").style.backgroundColor = "#dedbde";
 	document.getElementById("gamblingTab").style.backgroundColor = "#dedbde";
 	document.getElementById("settingsTab").style.backgroundColor = "#dedbde";
+	document.getElementById("updateInfoTab").style.backgroundColor = "#dedbde";
 }
 
 function buildingMouseOver()
@@ -2532,12 +2535,15 @@ function upgradesTab()
 	document.getElementById("transcendence").style.display = "none";
 	document.getElementById("gambling").style.display = "none";
 	document.getElementById("settings").style.display= "none";
+	document.getElementById("updateInfo").style.display= "none";
+	
 	document.getElementById("buildingsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("upgradesTab").style.backgroundColor = "#f1f0ee";
 	document.getElementById("achievementsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("transcendTab").style.backgroundColor = "#dedbde";
 	document.getElementById("gamblingTab").style.backgroundColor = "#dedbde";
 	document.getElementById("settingsTab").style.backgroundColor = "#dedbde";
+	document.getElementById("updateInfoTab").style.backgroundColor = "#dedbde";
 }
 
 function achievementsTab()
@@ -2549,12 +2555,15 @@ function achievementsTab()
 	document.getElementById("transcendence").style.display = "none";
 	document.getElementById("gambling").style.display = "none";
 	document.getElementById("settings").style.display= "none";
+	document.getElementById("updateInfo").style.display= "none";
+	
 	document.getElementById("buildingsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("upgradesTab").style.backgroundColor = "#dedbde";
 	document.getElementById("achievementsTab").style.backgroundColor = "#f1f0ee";
 	document.getElementById("transcendTab").style.backgroundColor = "#dedbde";
 	document.getElementById("gamblingTab").style.backgroundColor = "#dedbde";
 	document.getElementById("settingsTab").style.backgroundColor = "#dedbde";
+	document.getElementById("updateInfoTab").style.backgroundColor = "#dedbde";
 }
 
 function goldHoarderTab()
@@ -2599,12 +2608,15 @@ function transcendTab()
 	$("#transcendence").fadeIn();
 	document.getElementById("gambling").style.display = "none";
 	document.getElementById("settings").style.display= "none";
+	document.getElementById("updateInfo").style.display= "none";
+	
 	document.getElementById("buildingsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("upgradesTab").style.backgroundColor = "#dedbde";
 	document.getElementById("achievementsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("transcendTab").style.backgroundColor = "#f1f0ee";
 	document.getElementById("gamblingTab").style.backgroundColor = "#dedbde";
 	document.getElementById("settingsTab").style.backgroundColor = "#dedbde";
+	document.getElementById("updateInfoTab").style.backgroundColor = "#dedbde";
 }
 
 function gamblingTab()
@@ -2616,12 +2628,15 @@ function gamblingTab()
 	//document.getElementById("gambling").style.display = "inline";
 	$("#gambling").fadeIn();
 	document.getElementById("settings").style.display= "none";
+	document.getElementById("updateInfo").style.display= "none";
+	
 	document.getElementById("buildingsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("upgradesTab").style.backgroundColor = "#dedbde";
 	document.getElementById("achievementsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("transcendTab").style.backgroundColor = "#dedbde";
 	document.getElementById("gamblingTab").style.backgroundColor = "#f1f0ee";
 	document.getElementById("settingsTab").style.backgroundColor = "#dedbde";
+	document.getElementById("updateInfoTab").style.backgroundColor = "#dedbde";
 }
 
 function settingsTab()
@@ -2631,14 +2646,35 @@ function settingsTab()
 	document.getElementById("achievements").style.display = "none";
 	document.getElementById("transcendence").style.display = "none";
 	document.getElementById("gambling").style.display = "none";
-	//document.getElementById("settings").style.display= "inline";
 	$("#settings").fadeIn();
+	document.getElementById("updateInfo").style.display= "none";
+	
 	document.getElementById("buildingsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("upgradesTab").style.backgroundColor = "#dedbde";
 	document.getElementById("achievementsTab").style.backgroundColor = "#dedbde";
 	document.getElementById("transcendTab").style.backgroundColor = "#dedbde";
 	document.getElementById("gamblingTab").style.backgroundColor = "#dedbde";
 	document.getElementById("settingsTab").style.backgroundColor = "#f1f0ee";
+	document.getElementById("updateInfoTab").style.backgroundColor = "#dedbde";
+}
+
+function updateInfoTab()
+{
+	document.getElementById("buildings").style.display = "none";
+	document.getElementById("upgrades").style.display = "none";
+	document.getElementById("achievements").style.display = "none";
+	document.getElementById("transcendence").style.display = "none";
+	document.getElementById("gambling").style.display = "none";
+	document.getElementById("settings").style.display= "none";
+	$("#updateInfo").fadeIn();
+	
+	document.getElementById("buildingsTab").style.backgroundColor = "#dedbde";
+	document.getElementById("upgradesTab").style.backgroundColor = "#dedbde";
+	document.getElementById("achievementsTab").style.backgroundColor = "#dedbde";
+	document.getElementById("transcendTab").style.backgroundColor = "#dedbde";
+	document.getElementById("gamblingTab").style.backgroundColor = "#dedbde";
+	document.getElementById("settingsTab").style.backgroundColor = "#dedbde";
+	document.getElementById("updateInfoTab").style.backgroundColor = "#f1f0ee";
 }
 
 function mOver(obj)									//function to make menu popup when mousing over stuff
