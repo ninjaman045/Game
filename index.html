@@ -1,146 +1,547 @@
 <!DOCTYPE html>
 
+<!--
+TO DO:
+
+1. Output certain variables to multiple places at once     (will already did this but i fucked it up)
+2. Add small tutorial-popup when game is launched without saved data
+
+
+
+
+-->
+
+
+
 <html>
 
 <head>
 	<title>Incremental Transcendence</title>
 	<link type="text/css" rel="stylesheet" href="stylesheets/interface.css"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cinzel">
 </head>
 
 <body>
 	
-    <div id="wrapper">
-        <div id="top">
-			<!--THIS IS THE HEADER-->
-			<p>
-			<button onclick = "buyMultiple(1)">Buy 1</button>
-			<button onclick = "buyMultiple(10)">Buy 10</button>
-			<button onclick = "buyMultiple(100)">Buy 100</button>
-			<button onclick = "buyMultiple(1000)">Buy 1000</button>
-			Currently buying: <span id = "amountToBuy">1</span></br>
-			Test timer: <span id = "testTimer">0</span>
-			</p>
-        </div>
-        <div id="contentliquid"><div id="content">
-           <p>
-				Tier One Buildings:
-				<br />
-				<br />
+    <div style="width=100%; height=100%">
+
+		
+		
+		<div id="contentliquid"><div id="content">
+            <div id = "topBar">
+			<div id="title">
+				Incremental<br /> Transcendence
+			</div>
+			
+			<div id="mainStats">
+				Population: <span id = "population">0</span>/	<div></div>	
+				<span id = "populationCapacity">0</span>    <div></div>
+				Gold: <span id = "gold">0</span>     <div></div>
+				<div id = "scienceStuff1">Science: <span id = "science">0</span><br />     <div></div>
+				Gold to science ratio: <span id = "goldToScienceRatio">0</span>%</div>     <div></div>   							
+			</div>
+			
+			<div id = "specialButtons">
+				<div id = "dailyReward" onclick = "dailyReward()" onmouseover = "mOver(swiftCashPopUp)" onmouseout = "mOut(swiftCashPopUp)"><span style="font-weight:bold">Swift Cash!</span> </div>
 				
-				<div class="building" onclick = "buyCave()">Buy Cave							<!--Button to buy a cave--><br />
-				Each Cave gives you .1 population per second
+				<div id = "scienceStuff4">
+				<div class="scienceButton" onmouseover = "mOver(sciencePlus)" onmouseout = "mOut(sciencePlus)" onclick = "increaseScience()">Science +</div>
+				<div class="scienceButton" onmouseover = "mOver(scienceMinus)" onmouseout = "mOut(scienceMinus)" onclick = "decreaseScience()">Science -</div>
+				</div>
+			</div>
+			</div>
+				<div class = "buildingPopUp" id = "swiftCashPopUp">Doubles gold gains for 15 minutes! <br />
+				Time left on Swift Cash: <span id = "timer">0</span> seconds
 				<br />
-				Caves: <span id = "caves">0</span>									<!--Shows how many caves you have-->
-				<br />
-				Cave Cost: <span id = "caveCost">10</span> Gold</div>		<!--Shows cost of next cave-->
+				Time until Swift Cash can be activated: <span id = "timeLeft">0</span> seconds</div>
+				<div class = "buildingPopUp" id = "sciencePlus">Increases the amount of gold income that gets converted to science by 5%</div>
+				<div class = "buildingPopUp" id = "scienceMinus">Decreases the amount of gold income that gets converted to science by 5%</div>
+		<div style="clear: both">
+		
+			<!--SET UP TABS-->
+		    <div class = "tabs" id = "buildingsTab" onclick = "buildingsTab()" onmouseover = "buildingMouseOver()" onmouseout = "buildingMouseOut()">Buildings</div>
+			<div class = "tabs" id = "upgradesTab" onclick = "upgradesTab()" onmouseover = "upgradeMouseOver()" onmouseout = "upgradeMouseOut()">Upgrades</div>
+			<div class = "tabs" id = "achievementsTab" onclick = "achievementsTab()">Achievements</div>
+			<div class = "tabs" id = "transcendTab" onclick = "transcendTab()">Transcendence</div>
+			<div class = "tabs" id = "gamblingTab" onclick = "gamblingTab()">Gambling</div>
+			<div class="tabs" id = "settingsTab" onclick ="settingsTab()">Stats/Settings</div>
+			
+			<!--
+			Essentially how my version of tabs works is each content group gets its own tab (duh) and each tab is just a clickable div.
+			Each div when clicked activates a js function that makes that tabs content visible and all the other tabs content display = none.
+			Should be easy enough to use this to make div unclickable/appear at certain times and even animate using jquery later.
+			-->
+			
+			
+			<!-- TAB FOR BUILDINGS-->
+			
+			<div class "tabContent" id = "buildings">
+			<br />
+			
+				<div class="buyMultiple"  onclick = "buyMultiple(1)">Buy 1</div>
+				<div class="buyMultiple" onclick = "buyMultiple(10)">Buy 10</div>
+				<div class="buyMultiple" onclick = "buyMultiple(100)">Buy 100</div>
+				<div class="buyMultiple" onclick = "buyMultiple(1000)">Buy 1000</div>
+				Currently buying: <span id = "amountToBuy">1</span></br>
+				
+				<!--<div class = "tabs" id = "tier1Tab" onclick = "tier1()">Tier 1</div>
+				<div class = "tabs" id = "tier2Tab" onclick = "tier2()">Tier 2</div>
+				<div class = "tabs" id = "tier3Tab" onclick = "tier3()">Tier 3</div>
+				<br />-->
+			
+			
+			<!-- START TIER1 -->
+			
+			
+			<div class='tabContent' id='tier1'>
+				<!--Tier One Buildings:-->
+				
+				<div class = "tierButton" id = "tier1TopBar">Tier 1 Buildings</div>
+				
+				<!--CAVE-->
+				<div onmouseover = "mOver(cavePopUp)" onmouseout = "mOut(cavePopUp)" class="building" onclick = "buyCave()" id = "cave">
+					<!--<div class = "buildingPicture"> <img src="http://s4.postimg.org/r52zpyvf1/cave.gif" style = "width:100px;height:50px">    </div>-->
+					<div class = "buildingContent">Cave							
+					<br />
+					<span id = "caveCost">10.000</span> Gold
+					<br />
+					Purchased: <span id = "caves">0</span>
+				</div>		</div>
+				<div class = "buildingPopUp" id="cavePopUp" >
+					Each Cave gives you .1 population per second and increases your population capacity by 3 <br />  <br />
+					<em>"As good a place as any to start your civilization!"</em>    
+				</div>    
 				
 				
-				
-				<div class = "building" onclick = "buyDirtHut()">Buy Dirt Hut
-				<br />
-				Each Dirt Hut gives you 2 population per second
-				<br />
-				Dirt Huts: <span id = "dirtHuts">0</span>
-				<br />
-				Dirt Hut Cost: <span id = "dirtHutCost">1000</span> Gold</div>
-				
-				<div class = "building" onclick = "buyStickHut()">Buy Stick Hut
-				<br />
-				Each Stick Hut gives you 15 population per second
-				<br />
-				Stick Huts: <span id = "stickHuts">0</span>
-				<br />
-				Stick Hut Cost: <span id = "stickHutCost">100 Thousand</span> Gold</div>
-				
-				<div class = "building" onclick = "buySodHouse()">Buy Sod House
-				<br />
-				Each Sod House gives you 100 population per second
-				<br />
-				Sod Houses: <span id = "sodHouses">0</span>					<!-- somewhere in here should be a lotr hobbit hole reference at some point -->
-				<br />
-				Sod House Cost <span id = "sodHouseCost">10 Million</span> Gold</div>
-				
-				<div class = "building" onclick = "buyTreehouse()">Buy Treehouse	
-				<br />
-				Each Treehouse gives you 500 population per second
-				<br />
-				Treehouses: <span id = "treehouses">0</span>
-				<br />
-				Treehouse Cost: <span id = "treehouseCost">1 Billion</span> Gold
-				<br />
+				<!--DIRT HUT -->
+				<div onmouseover = "mOver(dirtHutPopUp)" onmouseout = "mOut(dirtHutPopUp)" class="building" onclick = "buyDirtHut()" id = "dirtHut">
+					Dirt Hut     
+					<br />
+					<span id = "dirtHutCost">80.000</span> Gold	
+					<br />
+					Purchased: <span id = "dirtHuts">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "dirtHutPopUp">
+					Each Dirt Hut gives you .5 population per second and increases your population capacity by 18<br /> <br />
+					<em>"Not a big improvement to the caves... but at least there are windows!"</em>
 				</div>
 				
-				<div class = "building" onclick = "buyFarm()">Buy Farm
-				<br />
-				Each Farm gives you 1500 population per second
-				<br />
-				Farms: <span id = "farms">0</span>
-				<br />
-				Farm Cost: <span id = "farmCost">100 Billion</span> Gold</div>
-				<br />
-				<br />
-				Tier 2 Buildings:
-				<br />
-				<br />
-				<div class = "building" onclick = "buyStoneBlockHouse()">Buy Stone Block House
-				<br />
-				Each Stone Block House gives you 25 Thousand population per second
-				<br />
-				Stone Block Houses: <span id = "stoneBlockHouses">0</span>
-				<br />
-				Stone Block House Cost: <span id = "stoneBlockHouseCost">10 Quadrillion</span> Gold</div>
+				
+				<!--STICK HUTS-->
+				<div onmouseover = "mOver(stickHutPopUp)" onmouseout = "mOut(stickHutPopUp)" div class = "building" id="stickHut" onclick = "buyStickHut()">
+					Stick Hut
+					<br />
+					<span id = "stickHutCost">400.000</span> Gold 
+					<br />
+					Purchased: <span id = "stickHuts">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "stickHutPopUp">
+					Each Stick Hut gives you 2 population per second and increases your population capacity by 86 <br /> <br />
+					<em>"Now we are getting somewhere!"</em>
+				</div>
+				
+				
+				<!--SOD HOUSE-->                                                              <!-- somewhere in here should be a lotr hobbit hole reference at some point -->
+				<div onmouseover = "mOver(sodHousePopUp)" onmouseout = "mOut(sodHousePopUp)" div class = "building" id="sodHouse" onclick = "buySodHouse()">
+					Sod House
+					<br />
+					<span id = "sodHouseCost">2.500 Thousand</span> Gold
+					<br />
+					Purchased: <span id = "sodHouses">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "sodHousePopUp">
+					Each Sod House gives you 7.5 population per second and increases your population capacity by 390 <br /> <br />
+					<em>"You would have to be some kind of little person to live in this hole! But at least I won't be pestered by anyone to go on an adventure..."</em>
+				</div>
+				
+				
+				<!--TREE HOUSE-->
+				<div onmouseover = "mOver(treeHousePopUp)" onmouseout = "mOut(treeHousePopUp)" class = "building" id="treehouse" onclick = "buyTreehouse()">
+					Treehouse	
+					<br />
+					<span id = "treehouseCost">9.001 Thousand</span> Gold
+					<br />
+					Purchased: <span id = "treehouses">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "treeHousePopUp">
+					Each Treehouse gives you 20 population per second and increases your population capacity by 1.200 Thousand <br /> <br />
+					<em>"This is surprisingly fancy! Hopefully no gorillas steal my babies!"</em>
+				</div>
+				
+				<!--Farm -->
+				<div onmouseover = "mOver(farmPopUp)" onmouseout = "mOut(farmPopUp)" class = "building" id="farm" onclick = "buyFarm()">
+					Farm
+					<br />
+					<span id = "farmCost">25.000 Thousand</span> Gold
+					<br />
+					Purchased: <span id = "farms">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "farmPopUp">
+					Each Farm gives you 50 population per second and increases your population capacity by 3.700 Thousand<br /> <br />
+					<em>"With a farm we can spend less time growing our own food and more time populating our civilization!"</em>
+				</div>
+				
+				<div class = "tierButton" id = "tier1to2Button">Go to tier 2 buildings <span id = "tier1To2Notification"> (You need to purchase an upgrade first)</span></div>
+				<!--<div class = "buildingPopUp" id = "tier1To2PopUp">
+					<em>Buy the unlock Tier 2 upgrade in the upgrades tab to unlock the next tier</em>
+				</div>-->
+				
+			</div>
+				
+				
+				 <!-- START TIER 2 -->
+				 
+				 
+			<div class="tabContent" id="tier2">
+	             <div class = "tierButton" id = "tier2to1Button">Go to tier 1 buildings</div>
+				 
+				 
 				<br />
 				
-				<div class = "building" onclick = "buyBlacksmith()">Buy Blacksmith
-				<br />
-				Each Blacksmith gives you 50 Thousand population per second
-				<br />
-				Blacksmiths: <span id = "blacksmiths">0</span>
-				<br />
-				Blacksmith Cost: <span id = "blacksmithCost">100 Quadrillion</span> Gold</div>
+				<!--STONE BLOCK HOUSE -->
+				<div onmouseover = "mOver(stoneBlockHousePopUp)" onmouseout = "mOut(stoneBlockHousePopUp)" class = "building" id="stoneBlockHouse" onclick = "buyStoneBlockHouse()">
+					Stone Block House
+					<br />
+					<span id = "stoneBlockHouseCost">2.000 Million</span> Gold
+					<br />
+					Purchased: <span id = "stoneBlockHouses">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "stoneBlockHousePopUp">
+					Each Stone Block House gives you 300 population per second and increases your population capacity by 27.000 Thousand<br /> <br />
+					<em>"No wolves will be getting me in here!"</em>
+				</div>
+				
+				<!--BLACKSMITH -->
+				<div onmouseover = "mOver(blacksmithPopUp)" onmouseout = "mOut(blacksmithPopUp)" class = "building" id="blacksmith" onclick = "buyBlacksmith()">
+					Blacksmith
+					<br />
+					<span id = "blacksmithCost">3.500 Million</span> Gold
+					<br />
+					Purchased: <span id = "blacksmiths">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "blacksmithPopUp">
+					Each Blacksmith gives you 500 population per second and increases your population capacity by 54.000 Thousand<br /> <br />
+					<em>"Now that we can make tools our population can really take off!"</em>
+				</div>
+				
+				<!-- BATHHOUSE -->
+				<div class = "building" id = "bathHouse" onclick = "buyBathHouse()" onmouseover = "mOver(bathHousePopUp)" onmouseout = "mOut(bathHousePopUp)">
+					Bathhouse
+					<br />
+					<span id = "bathHouseCost">7.500 Million</span> Gold
+					<br />
+					Purchased: <span id = "bathHouses">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "bathHousePopUp">
+					Each Bathhouse gives you 800 population per second and increases your population capacity by 100.000 Thousand<br /> <br />
+					<em>"A nice bathhouse to relax in."</em>
+				</div>
+				
+				<!-- CHURCH -->
+				<div class = "building" id = "church" onclick = "buyChurch()" onmouseover = "mOver(churchPopUp)" onmouseout = "mOut(churchPopUp)">
+					Church
+					<br />
+					<span id = "churchCost">14.000 Million</span> Gold
+					<br />
+					Purchased: <span id = "churches">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "churchPopUp">
+					Each Church gives you 1.350 Thousand population per second and increases your population capacity by 210.000 Thousand <br /> <br />
+					<em>"A little religion never hurt anyone."</em>
+				</div>
+				
+				<!-- TOWN HALL -->
+				<div class = "building" id = "townHall" onclick = "buyTownHall()" onmouseover = "mOver(townHallPopUp)" onmouseout = "mOut(townHallPopUp)">
+					Town Hall
+					<br />
+					<span id = "townHallCost">25.000 Million</span> Gold
+					<br />
+					Purchased: <span id = "townHalls">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "townHallPopUp">
+					Each Town Hall gives you 2.000 Thousand population per second and increases your population capacity by 370.000 Thousand <br /> <br />
+					<em>"A governing building will help us be more efficient."</em>
+				</div>
+				
+				<!-- CASTLE -->
+				<div class = "building" id = "castle" onclick = "buyCastle()" onmouseover = "mOver(castlePopUp)" onmouseout = "mOut(castlePopUp)">
+					Castle
+					<br />
+					<span id = "castleCost">65.000 Million </span> Gold
+					<br />
+					Purchased: <span id = "castles">0</span>
+				</div>
+				<div class = "buildingPopUp" id = "castlePopUp">
+					Each Castle gives you 3.500 Thousand population per second and increases your population capacity by 780.000 Thousand <br /> <br />
+					<em>"Magnificent"</em>
+				</div>
+					
+				
+				<div class = "tierButton" id = "tier2to3Button">Go to tier 3 buildings</div>
+				
+			</div>
+			
+			<div class='tabContent' id='tier3'>
+			Tier 3
+			<div class = "tierButton" id = "tier3to2Button">Go to tier 2 buildings</div>
+			
+			<br />
+			</div>
+			</div>
+			
+			<!-- TAB FOR UPGRADES -->
+			
+			<div class "tabContent" id = "upgrades">
 				
 				<br />
+				<div class = "upgrade" id = "unlockScienceUpgrade" onclick = "buyUnlockScience()" onmouseover = "mOver(scienceUnlockPopUp)" onmouseout = "mOut(scienceUnlockPopUp)">Unlock Science
 				<br />
-				Upgrades			
-				<br />
-				<div class = "upgrade" onclick = "upgradeA()">UpgradeA: Boosts Caves pop/sec by 5%		<!--First upgrade, needs named and made to-->
-				<br />																										<!-- dissapear after purchase(maybe?)-->
-				Cost: <span id = "upgradeACost">100</span> science</div>
+				100.000 Gold</div>
 				
-				<div class = "upgrade" onclick = "upgradeB()">UpgradeB: Boosts Dirt Huts pop/sec by 5%
-				<br />
-				Cost: <span id = "upgradeBCost">10 Thousand</span> science</div>
+				<div class = "upgradePopUp" id = "scienceUnlockPopUp"><em>"This upgrade will allow you to start converting your gold gains into science.
+				It is a must for improving your civilization!"</em></div>
 				
-				<div class = "upgrade" onclick = "upgradeC()">UpgradeC: Boosts Stick Huts pop/sec by 5%
+				<div class = "upgrade" id="fireUpgrade" onclick = "buyFireUpgrade()" onmouseover = "mOver(fireUpgradePopUp)" onmouseout = "mOut(fireUpgradePopUp)">Fire		<!--First upgrade-->
+				<br />																									
+				100.000 Science</div>
+				
+				<div class = "upgradePopUp" id = "fireUpgradePopUp"><em>"Discover fire! You will be able to cook food and see in the dark!"</em><br/> <br />
+				Increases your population capacity by 15.</div>
+				
+				<div class = "upgrade" id = "huntingUpgrade" onclick = "buyHuntingUpgrade()" onmouseover = "mOver(huntingUpgradePopUp)" onmouseout = "mOut(huntingUpgradePopUp)">
+					Hunting
+					<br />
+					250.000 Science
+				</div>
+				<div class= "upgradePopUp" id = "huntingUpgradePopUp">
+					<em>"Instead of just scavenging for food your civilization can start hunting for it!"</em>
+					<br /> <br />
+					Increases your population capacity by 25.
+				</div>
+				
+				<div class = "upgrade" id = "mudUpgrade" onclick = "buyMudUpgrade()" onmouseover = "mOver(mudUpgradePopUp)" onmouseout = "mOut(mudUpgradePopUp)">
+					Mud
+					<br />
+					400.000 Science
+				</div>
+				<div class = "upgradePopUp" id = "mudUpgradePopUp">
+					<em>"Your people have found that adding water to the dirt makes it easier to work with!"</em>
+					<br /> <br />
+					Increases your population capacity by 50.
+				</div>
+				
+				<div class = "upgrade" id = "shovelsUpgrade" onclick = "buyShovelsUpgrade()" onmouseover = "mOver(shovelsUpgradePopUp)" onmouseout = "mOut(shovelsUpgradePopUp)">
+					Shovels
+					<br />
+					700.000 Science
+				</div>
+				<div class = "upgradePopUp" id = "shovelsUpgradePopUp">
+					<em>"This is significanly easier than digging with our hands!"</em>
+					<br /> <br />
+					Increases your population capacity by 80.
+				</div>
+					
+				
+				<div class = "upgrade" id = "sturdySticksUpgrade" onclick = "buySturdySticksUpgrade()" onmouseover = "mOver(sturdySticksUpgradePopUp)" onmouseout = "mOut(sturdySticksUpgradePopUp)">
+					Sturdy Sticks
+					<br />
+					1.000 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "sturdySticksUpgradePopUp">
+					<em>"Sturdier sticks hold up against gusts of wind much better!"</em>
+					<br /> <br />
+					Increases your population capacity by 125.
+				</div>
+				
+				<div class = "upgrade" id = "axesUpgrade" onclick = "buyAxesUpgrade()" onmouseover = "mOver(axesUpgradePopUp)" onmouseout = "mOut(axesUpgradePopUp)">
+					Axes
+					<br />
+					1.500 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "axesUpgradePopUp">
+					<em>"Way faster than punching the trees down!"</em>
+					<br /> <br />
+					Increases your population capacity by 150.
+				</div>
+				
+				<div class = "upgrade" id = "wizardUpgrade" onclick = "buyWizardUpgrade()" onmouseover = "mOver(wizardUpgradePopUp)" onmouseout = "mOut(wizardUpgradePopUp)">
+					Wizard
+					<br />
+					3.000 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "wizardUpgradePopUp">
+					<em>"You've been officially labeled a disturber of the peace."</em>
+					<br /> <br />
+					Increases your population capacity by 500.
+				</div>
+				
+				<div class = "upgrade" id = "adventureUpgrade" onclick = "buyAdventureUpgrade()" onmouseover = "mOver(adventureUpgradePopUp)" onmouseout = "mOut(adventureUpgradePopUp)">
+					Adventure
+					<br />
+					5.000 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "adventureUpgradePopUp">
+					<em>"This is just what I was trying to avoid!"</em>
+					<br /> <br />
+					Increases your population capacity by 750.
+				</div>
+				
+				<div class = "upgrade" id = "laddersUpgrade" onclick = "buyLaddersUpgrade()" onmouseover = "mOver(laddersUpgradePopUp)" onmouseout = "mOut(laddersUpgradePopUp)">
+					Ladders
+					<br />
+					20.000 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "laddersUpgradePopUp">
+					<em>"Why didn't we think of these earlier..."</em> 
+					<br /> <br />
+					Increases your population capacity by 3.000 Thousand
+				</div>
+				
+				<div class = "upgrade" id= "tallerTreesUpgrade" onclick = "buyTallerTreesUpgrade()" onmouseover = "mOver(tallerTreesUpgradePopUp)" onmouseout = "mOut(tallerTreesUpgradePopUp)">
+					Taller Trees
+					<br />
+					30.000 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "tallerTreesUpgradePopUp">
+					<em>"Perhaps this wasn't the best idea..."</em>
+					<br /> <br />
+					Increases your population capacity by 5.000 Thousand
+				</div>
+				
+				<div class = "upgrade" id = "hoesUpgrade" onclick = "buyHoesUpgrade()" onmouseover = "mOver(hoesUpgradePopUp)" onmouseout = "mOut(hoesUpgradePopUp)">
+					Hoes
+					<br />
+					50.000 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "hoesUpgradePopUp">
+					<em>"No not those kind of hoes..."</em>
+					<br /> <br />
+					Increases your population capacity by 8.000 Thousand
+				</div>
+				
+				<div class = "upgrade" id = "domesticationUpgrade" onclick = "buyDomesticationUpgrade()" onmouseover = "mOver(domesticationUpgradePopUp)" onmouseout = "mOut(domesticationUpgradePopUp)">
+					Domestication
+					<br /> 
+					75.000 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "domesticationUpgradePopUp">
+					<em>"Hopefully PETA doesn't bother us..."</em>
+					<br /> <br />
+					Increases your population capacity by 15.000 Thousand
+				</div>
+				
+				<div class = "upgrade" id = "cookieUpgrade" onclick = "buyCookieUpgrade()" onmouseover = "mOver(cookieUpgradePopUp)" onmouseout = "mOut(cookieUpgradePopUp)">
+					Cookie
+					<br />
+					500.000 Thousand Science
+				</div>
+				<div class = "upgradePopUp" id = "cookieUpgradePopUp">
+					<em>"I'm not sure if I should click this..."</em>
+					<br /> <br />
+					Who knows what will happen if you click this...
+				</div>
+				
+				<div class = "upgrade" id = "unlockTier2Upgrade" onclick = "buyUnlockTier2Upgrade()" onmouseover = "mOver(unlockTier2UpgradePopUp)" onmouseout = "mOut(unlockTier2UpgradePopUp)">Unlock tier 2
+				<br /> 
+				1.000 Million science</div>
+				
+				<div class = "upgradePopUp" id = "unlockTier2UpgradePopUp"><em>"Advance your civilization into the next era! Do not worry though, you will
+				still be able to purchase this eras buildings and upgrades even after you buy this." </em> <br/> <br />
+				As an added bonus this also doubles your Gold Per Population!</div>
+			</div>
+				
+				<!-- TAB FOR ACHIEVEMENTS -->
+				
+			<div class "tabContent" id = "achievements">
 				<br />
-				Cost: <span id = "upgradeCCost">1 Million</span> science</div>
+				Each of your achievements gives you an overall gold per pop boost of 2%. <br />
+				Current Multiplier: <span id = "achievementBoost">100</span>% <br />
+				
+				<div class = "tabs" id = "goldHoarderTab" onclick = "goldHoarderTab()">Gold Hoarder</div>
+				<div class = "tabs" id = "tier1AchievementsTab" onclick = "tier1AchievementsTab()">Tier 1 Achievements</div>
+				<div class = "tabs" id = "tier2AchievementsTab" onclick = "tier2AchievementsTab()">Tier 2 Achievements</div>
+				
+				<div class "tabContent" id = "goldHoarderAchievements">
+					Gold Hoarder 1: Have 1.000 Thousand Gold: <span id = "goldHoarder1Status"> </span>
+					<br />
+					<br />
+					Gold Hoarder 2: Have 1.000 Million Gold: <span id = "goldHoarder2Status"> </span>
+					<br />
+					<br />
+					Gold Hoarder 3: Have 1.000 Billion Gold: <span id = "goldHoarder3Status"> </span>
+					<br />
+					<br />
+					Gold Hoarder 4: Have 1.000 Trillion Gold: <span id = "goldHoarder4Status"> </span>
+					<br />
+					<br />
+					Gold Hoarder 5: Have 1.000 Quadrillion Gold: <span id = "goldHoarder5Status"> </span>
+					<br />
+					<br />
+					Gold Hoarder 6: Have 1.000 Quintillion Gold: <span id = "goldHoarder6Status"> </span>
+					<br />
+					<br />
+					Gold Hoarder 7: Have 1.000 Sextillion Gold: <span id = "goldHoarder7Status"> </span>
+				</div>	
+				
+				<div class "tabContent" id = "tier1Achievements">
+					Tier 1 Builder 1: Have 1 of each tier 1 building: <span id = "tier1Builder1Status"> </span>
+					<br />
+					<br />
+					Tier 1 Builder 2: Have 5 of each tier 1 building: <span id = "tier1Builder2Status"> </span>
+					<br />
+					<br />
+					Tier 1 Builder 3: Have 10 of each tier 1 building: <span id = "tier1Builder3Status"> </span>
+					<br />
+					<br />
+					Tier 1 Builder 4: Have 25 of each tier 1 building: <span id = "tier1Builder4Status"> </span>
+					<br />
+					<br />
+					Tier 1 Builder 5: Have 50 of each tier 1 building: <span id = "tier1Builder5Status"> </span>
+					<br />
+					<br />
+					Tier 1 Builder 6: Have 75 of each tier 1 building: <span id = "tier1Builder6Status"> </span>
+					<br />
+					<br />
+					Tier 1 Builder 7: Have 100 of each tier 1 building: <span id = "tier1Builder7Status"> </span>
+				</div>
+				
+				<div class = "tabContent" id = "tier2Achievements">
+					Tier 2 Builder 1: Have 1 of each tier 2 building: <span id = "tier2Builder1Status"> </span>
+					<br />
+					<br />
+					Tier 2 Builder 2: Have 5 of each tier 2 building: <span id = "tier2Builder2Status"> </span>
+					<br />
+					<br />
+					Tier 2 Builder 3: Have 10 of each tier 2 building: <span id = "tier2Builder3Status"> </span>
+					<br />
+					<br />
+					Tier 2 Builder 4: Have 25 of each tier 2 building: <span id = "tier2Builder4Status"> </span>
+					<br />
+					<br />
+					Tier 2 Builder 5: Have 50 of each tier 2 building: <span id = "tier2Builder5Status"> </span>
+					<br />
+					<br />
+					Tier 2 Builder 6: Have 75 of each tier 2 building: <span id = "tier2Builder6Status"> </span>
+					<br />
+					<br />
+					Tier 2 Builder 7: Have 100 of each tier 2 building: <span id = "tier2Builder7Status"> </span>
+				</div>
+			</div>
+				
+				<!-- TAB FOR TRANSCENDENCE -->
+				
+			<div class "tabContent" id = "transcendence">
+				
 				<br />
-				Achievements
+				<div class="transcend" onClick= "transcend()">Transcend</div>
 				<br />
-				Achievement 1: Have 100 gold
+				Transcendent Beings give you a 5% boost to gold per pop each and Transcendent Knights give you a 10% boost to gold per pop each.
 				<br />
-				Completed: <span id = "achieve1Status">Not Completed</span>
+				These boosts are multiplicative; ie. 100 Transcendent Beings would give you a 500%  boost and having 1 Transcendent Knight 
 				<br />
-				<br />
-				Achievement 2: Have 1 thousand gold
-				<br />
-				Completed: <span id = "achieve2Status">Not Completed</span>
-				<br />
-				<br />
-				Achievement 3: Have 10 thousand gold
-				<br />
-				Completed: <span id = "achieve3Status">Not Completed</span>
-				<br />
-				<br />
-				Prestige
-				<br />
-				<button onclick = "transcend()">Transcend</button>
-				<br />
-				Transcendent Beings give you a 10% boost to gold per pop each and Transcendent Knights give you a 25% boost to gold per pop each.
-				<br />
-				These boosts are multiplicative; ie. 100 Transcendent Beings would give you a 1000%  boost and having 1 Transcendent Knight 
-				<br />
-				with those would boost that up to a 1250% boost.
+				with those would boost that up to a 550% boost.
 				<br />
 				<br />
 				Transcendent Beings: <span id = "transcendentBeings">0</span>
@@ -153,15 +554,22 @@
 				Transcendent Knights gained on Transcend: <span id = "tKsToGain">0</span>
 				<br />
 				<br />
+				</div>
+				
+				<!-- TAB FOR GAMBLING -->
+				
+				<div class "tabContent" id = "gambling">
+				
+				
 					<div>
 						Gambling
 						<br />
 						Amount of gold being bet: <span id = "betPercent">50</span>%
 						<br />
-						<button onclick = "increaseBet()">Increase betting percentage by 5%</button>
-						<button onclick = "decreaseBet()">Decrease betting percentage by 5%</button>
+						<div class='changeBet' onclick = "increaseBet()">Increase betting percentage by 5%</div>
+						<div class = "changeBet" onclick = "decreaseBet()">Decrease betting percentage by 5%</div>
 						<br />
-						<button onclick= "gamble()">Gamble!</button>
+						<button onclick= "slot()">Spin!</button>
 						<br />
 						Roll 1: <span id = "roll1">Cave</span>
 						<br />
@@ -169,64 +577,85 @@
 						<br />
 						Roll 3: <span id = "roll3">Cave</span>
 						<br />
-						<span id = "winnings">Roll to win!</span>
+						<span id = "slotWinnings">Roll to win!</span>
 						<br />
 						<br />
 						
+						<br />
+						Higher or Lower
+						<br />
+						<div id = "higherLowerStart">
+						<button onclick = "higherLowerStart()">Roll!</button></div>
+						<div id = "higherLowerRolls">
+						<span id = "higherLowerRoll1"></span>
+						<br />
+						<span id = "higherLowerRoll2"></span>
+						<br />
+						<span id = "higherLowerRoll3"></span>
+						<br />
+						<span id = "higherLowerTotal"></span>
+						<br />
+						Will your next roll be higher or lower?
+						<br />
+						<button onclick = "higher()">Higher!</button> <button onclick = "lower()">Lower!</button></div>
+						<span id = "higherLowerWinnings"></span>
+						<br />
 					</div>
-			</p>
-       </div></div>
-        <div id="leftcolumn">
-            Population: <span id = "population">0</span><br />						<!--Shows your population-->
-		Population/Second: <span id = "popPerSec">0</span><br />		<!--need to add a way to output this to multiple places at once-->
-		Gold: <span id = "gold">0</span><br />									<!--Shows your Gold-->
-		Gold/Second: <span id = "goldPerSec">0</span><br />
-		Gold to science ratio: <span id = "goldToScienceRatio">50</span>% <br />
-		
-		<div id="sciAmtButton">
-			<button onclick = "increaseScience()">Increase how much gold converts to science</button><br />
-			<button onclick = "decreaseScience()">Decrease how much gold converts to science</button>
+				</div>
+				
+				<!-- TAB FOR SETTINGS -->
+			
+			<div class "tabContent" id="settings">
+			<div class="sideButtonSL" onclick = "saveGame()">Save</div><br />					
+			<div class="sideButtonSL" onclick = "loadGame()">Load</div><br />
+			<div class="sideButtonSL" onclick = "confirmReset()">Hard Reset</div><br />
+			<div class="sideButtonSL" onclick = "exportGame()">Export</div><br />
+			<div class="sideButtonSL" onclick = "importGame()">Import</div><br />
 			<br />
-		</div>
-		Science: <span id = "science">0</span><br />
-		Science/Second: <span id = "sciencePerSec1">0</span><br />
-			<p><button onclick = "saveGame()">Save (working on)</button>					
-			<br />
-			<button onclick = "loadGame()">Load (working on)</button>
-			<br />
-			<button onclick = "confirmReset()">Hard Reset</button>
-			<br />
-			<button onclick = "exportGame()">Export</button>
-			<br />
-			<button onclick = "importGame()">Import</button></p>
-			<button onclick = "dailyReward()">Daily Reward! Doubles gold gains for 15 minutes!</button>
-			<br />
-			Time left on Daily Reward: <span id = "timer">0</span> seconds
-			<br />
-			Time until Daily Reward can be activated: <span id = "timeLeft">0</span> seconds
-			<br />
+			
+			<hr width="25%" align="left">
+			
+			
+			
+			<hr width="25%" align="left">
+			
 			Stats
 			<br />
-			Population/Second: <span id = "popPerSec2">0</span>		<!--Shows population gained per second-->
+			Population/Second: <span id = "popPerSec">0</span>		<!--Shows population gained per second-->
 			<br />
-			Gold/Second: <span id = "goldPerSec2">0</span>				<!--Shows gold gained per second-->
+			Gold/Second: <span id = "goldPerSec">0</span>				<!--Shows gold gained per second-->
 			<br />
 			Gold/Pop/Sec: <span id = "goldPerPop">0</span>
 			<br />
-			Science/Second: <span id = "sciencePerSec2">0</span>
+			<div id = "scienceStuff2">Science/Second: <span id = "sciencePerSec">0</span>
 			<br />
 			Science/Pop/Sec: <span id = "sciencePerPop">0</span>
+			<br /></div>
+			<!--Population/Second: <span id = "popPerSec">0</span>	
 			<br />
-			All Time Science: <span id = "allTimeScience">0</span>
+			Gold/Second: <span id = "goldPerSec">0</span>
+			<br />-->
 			<br />
-			All Time Gold: <span id = "allTimeGold">0</span>				<!--Shows how much gold youve made total-->
-		</div>
-        <div id="footer">
-			<!--THIS IS THE FOOTER-->
-            <p></p>
-        </div>
-    </div>
+			<div id = "scienceStuff3">All Time Science: <span id = "allTimeScience">0</span>
+			<br /></div><br />
+			All Time Gold: <span id = "allTimeGold">0</span>
+			
+			<hr width="25%" align="left">
+			
+			<hr width="25%" align="left"></div>
+			
+			<p>Test timer: <span id = "testTimer">0</span></p>
+			
+			</div>
+		</div>	
+       </div></div>
+      
+	  
+
+
+    </div></div>
 	<script type="text/javascript" src="javascripts/main.js"></script>
+	<!--<script type="text/javascript" src="tabs.js"></script>-->
 </body>
 
 </html>
