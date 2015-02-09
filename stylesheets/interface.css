@@ -1,14 +1,89 @@
+.buyMultiple
+{
+	cursor: pointer;
+	background-color: #AFAFAF;
+	color:#000000;
+	width: 8em;
+	height:1.5em;
+	text-align: center;
+	display: inline-block;
+	border-radius: 7px;
+	
+}
+
+.sideButtonSL
+{
+	cursor: pointer;
+	background-color: #AFAFAF;
+	color: #000000;
+	width: 140px;
+	height: 30px;
+	margin: 5px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 7px;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.sideButton
+{
+	cursor: pointer;
+	background-color: #AFAFAF;
+	color: #000000;
+	width: 140px;
+	height: 50px;
+	margin: 5px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 7px;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.transcend
+{
+	cursor: pointer;
+	background-color: #AFAFAF;
+	color: #000000;
+	width: 120px;
+	height: 70px;
+	margin: 5px;
+	text-align: center;
+	font-size: 150%;
+	display: inline-block;
+	border-radius: 7px;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 .building
 {
 	cursor: pointer;
 	background-color: #AFAFAF;
 	color: #000000;
-	width: 500px;
-	height: 70px;
+	width: 400px;
+	height: 55px;
 	margin: 5px;
 	text-align: center;
 	display: inline-block;
+	border-radius: 7px;
 	
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -27,6 +102,131 @@
 	height: 45px;
 	margin: 5px;
 	text-align: center;
+	border-radius: 7px;
+	
+	display: none;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	
+}
+
+.buildingPopUp
+{
+	position: absolute;
+	background-color: #8db3fd;
+	color: black;
+	min-height: 5em;
+	width: 20em;
+	display: none;
+}
+
+.buyMultiple:hover
+{
+background-color:#8F8F8F;
+color:#111111;
+}
+
+.sideButtonSL:hover
+{
+background-color: #AFAFAF;
+color: #FFFFFF;
+}
+
+.sideButton:hover
+{
+background-color: #AFAFAF;
+color: #FFFFFF;
+}
+
+.upgrade:hover
+{
+	background-color: #8f8f8f;
+	color: #111111
+}
+
+.upgradePopUp
+{
+	position: absolute;
+	background-color: #8db3fd;
+	color: black;
+	min-height: 5em;
+	width: 20em;
+	display: none;
+}
+
+#scienceStuff1
+{
+	display: none;
+}
+
+#scienceStuff2
+{
+	display: none;
+}
+
+#scienceStuff3
+{
+	display: none;
+}
+
+#scienceStuff4
+{
+	display: none;
+}
+
+.building:hover
+{
+	background-color: #8f8f8f;
+	color: #111111
+
+}
+
+.transcend:hover
+{
+	background-color: #BD4D4D;
+	color: #333333;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #CC0000;
+}
+
+body {
+    font-family: Inconsolata,Verdana, Arial, Helvetica, sans-serif;
+    font-size: 80%;
+    color:#333;
+	
+}
+
+p {
+    padding: 10px;
+}
+
+#mainStats {
+	font-family: serif;
+	font-size:1.25em;
+	display: inline-block;
+	/*float:right;
+	//width:75%;*/
+}
+
+#topBar
+{
+	width: 840px;
+}
+
+#specialButtons
+{
+
+	display: inline-block;
+	text-align: center;
+	width: 250px;
+	height: 100px;
+	float: right;
 	
 	
 	-webkit-touch-callout: none;
@@ -37,38 +237,66 @@
     user-select: none;
 }
 
-.upgrade:hover
+#dailyReward
 {
-	background-color: #8f8f8f;
-	color: #111111
+	cursor: pointer;
+	background-color: #AFAFAF;
+	color: #000000;
+	width: 120px;
+	height: 30px;
+	margin: 5px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 7px;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.building:hover
+.scienceButton
 {
-	background-color: #8f8f8f;
-	color: #111111
+	cursor: pointer;
+	background-color: #AFAFAF;
+	color: #000000;
+	width: 100px;
+	height: 30px;
+	margin: 5px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 7px;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-body {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    color:#333
-}
-
-p {
-    padding: 10px;
+#title { 
+	font-family: Cinzel, sans-serif;
+	font-size: 2.5em;
+	font-weight: bold;
+	display: inline-block;
+	/*width: 25%;
+	//float:left;*/
 }
 
 #wrapper {
     width: 100%;
-    min-width: 1000px;
+    min-width: 500px; 	
     max-width: 2000px;
     margin: 0 auto;
-}
+	overflow-y: scroll;
+	}
 
 #top {
     float: left;
-    height: 65px;
+    height: 50%;
     width: 100%;
     background: black;
 	color: gray;
@@ -81,7 +309,8 @@ p {
 
 #content {
     background: #FFFFFF;
-    margin-left: 150px;
+    padding: 1em;
+	font-size: 1.15em
 }
 
 #leftcolumn {
@@ -101,3 +330,223 @@ p {
 #hidden {
 	display: none;
 }
+/*
+start for body TABS 
+ul#tabs { list-style-type: none; margin: 20px 0 0 0; padding: 0 0 0.3em 0; }
+ul#tabs li { display: inline; }
+ul#tabs li a { color: #42454a; background-color: #dedbde; border: 1px solid #c9c3ba; border-bottom: none; padding: 0.3em; text-decoration: none; }
+ul#tabs li a:hover { background-color: #f1f0ee; }
+ul#tabs li a.selected { color: #000; background-color: #f1f0ee; font-weight: bold; padding: 0.7em 0.3em 0.38em 0.3em; }
+div.tabContent { border: 1px solid #c9c3ba; padding: 0.5em; background-color: #f1f0ee; }
+div.tabContent.hide { display: none; }
+
+start for side LINKS 
+ul#links {list-style-type: none; margin: 30px 0 0 0; padding: 0 0 0.3em 0;    }
+ul#links li {display: inline;    }
+ul#links li a {    }
+ul#links li a:hover {    }
+ul#links li a:selected {    }
+*/
+/*start IDs for checkHidden function */
+/* limit amount of buildings visible to player based on gold */
+.tabs
+{
+	list-style-type: none; 
+	margin: 20px 0 0 0; 
+	padding: 0 0 0.2em 0;
+	display: inline-block;
+	color: #42454a; 
+	background-color: #dedbde; 
+	border: 1px solid #c9c3ba; 
+	border-bottom: none; 
+	padding: 0.4em; 
+	text-decoration: none;
+	cursor: pointer;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.tabs:hover
+{
+	background-color: #f1f0ee;
+}
+
+.tabContent
+{
+
+	background-color: #f1f0ee;
+	width: 58em;
+}
+
+#tier1Tab
+{
+	background-color: #f1f0ee;
+}
+
+#tier2
+{
+	display: none;
+}
+
+#tier3
+{
+	display: none;
+}
+
+#buildingsTab
+{
+	background-color: #f1f0ee;
+}
+
+#buildings
+{
+	background-color: #f1f0ee;
+	width: 855px;
+	min-height: 300px;
+}
+
+#upgrades
+{
+	display: none;
+	background-color: #f1f0ee;
+	width: 855px;
+	min-height: 300px;
+}
+
+#achievements
+{
+	display: none;
+	background-color: #f1f0ee;
+	width: 855px;
+	min-height: 300px;
+}
+
+#tier1Achievements
+{
+	display: none;
+}
+
+#tier2Achievements
+{
+	display: none;
+}
+
+#transcendence
+{
+	display: none;
+	background-color: #f1f0ee;
+	width: 855px;
+	min-height: 300px;
+}
+
+#gamblingTab
+{
+	display: none;
+}
+
+#gambling
+{
+	display: none;
+	background-color: #f1f0ee;
+	width: 855px;
+	min-height: 300px;
+}
+
+#settings
+{
+	display:none;
+	background-color: #f1f0ee;
+	width: 855px;
+	min-height: 300px;
+}
+
+#dirtHut { display: none}
+#stickHut { display: none }
+#sodHouse {display: none}
+#treehouse {display: none}
+#farm {display: none}
+/*#stoneBlackHouse {display: none}*/
+#blacksmith {display: none}
+#bathHouse {display: none}
+#church {display: none}
+#townHall {display: none}
+#castle {display: none}
+
+#higherLowerRolls
+{
+	display: none;
+}
+
+
+
+.changeBet
+{
+	cursor: pointer;
+	background-color: #AFAFAF;
+	color: #000000;
+	width: 120px;
+	height: 70px;
+	margin: 5px;
+	text-align: center;
+	font-size: 120%;
+	display: inline-block;
+	border-radius: 7px;
+	
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.tierButton
+{
+	background-color: gray;
+	cursor: pointer;
+	width: 57em;
+	height: 2em;
+	text-align: center;
+	display: inline-block;
+}
+
+#tier1TopBar
+{
+	cursor: auto;
+}
+
+#tier1to2Button
+{
+	display: none;
+}
+
+#upgradesTab
+{
+	display: none;
+}
+
+#transcendTab
+{
+	display: none;
+}
+
+/*.buildingPicture
+{
+	text-align: left;
+	display: inline-block;
+}
+
+.buildingContent
+{
+	display: inline-block;
+	text-align: center;
+}
+*/
+
+
+
